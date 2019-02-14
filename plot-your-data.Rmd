@@ -1,0 +1,124 @@
+---
+title: "Plot your data"
+author: "Tom Palmer, `tom.palmer@lancaster.ac.uk`, Department of Mathematics and Statistics, Lancaster University"
+date: "MSc Statistics Open Day, 27^th^ February 2019"
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_float: true
+runtime: shiny
+---
+
+
+```{r, include=FALSE}
+library(foreign)
+library(tidyverse)
+library(plotly)
+```
+
+# Introduction
+Click through the buttons below to reveal summary statistics and other interesting statistical properties of four datasets.
+
+As you progress through the buttons think about whether or not you expect scatter plots of the 4 datasets, which you'll be shown at the end, to be very similar to one another or not.
+
+# Activity
+```{r, echo=FALSE}
+# Data from <https://en.wikipedia.org/wiki/Anscombe%27s_quartet>
+dat <- read.csv("anscombes.csv")
+
+shinyApp(
+  ui = fluidPage(
+
+    actionButton(inputId = "click2", label = "Click to calculate summary statistics"),
+    tableOutput("summary1"),
+    
+    actionButton(inputId = "click3", label = "Click to calculate correlations"),
+    tableOutput("summary2"),
+    
+    actionButton(inputId = "click1", label = "Click to fit linear model with 95% CIs"),
+    verbatimTextOutput("fit1"),
+    verbatimTextOutput("fit2"),
+    verbatimTextOutput("fit3"),
+    verbatimTextOutput("fit4"),
+    plotlyOutput("plot1"),
+    textOutput("textout2"),
+    
+    actionButton(inputId = "click4", label = "Click to include data points on plots"),
+    plotlyOutput("plot2"),
+    
+    actionButton(inputId = "click5", label = "Click to reveal take home message about activity"),
+    htmlOutput("textout1")
+    
+  ),
+  server = function(input, output) {
+    
+    observeEvent(input$click2, {
+      output$summary1 = renderTable({
+        dat %>% 
+          select(dataset, x, y) %>%
+          group_by(dataset) %>%
+          summarise_all(
+            funs(mean = mean, var = var)
+          )
+      })
+    })
+
+    observeEvent(input$click3, {
+      output$summary2 = renderTable({
+        dat %>% 
+          group_by(dataset) %>%
+          summarise(
+            corxy = cor(x, y), r2 = cor(x, y)^2
+          )
+      })
+    })
+
+    observeEvent(input$click1, {
+      output$plot1 = renderPlotly({
+        ggplot(dat, aes(x, y, color = dataset)) + 
+          geom_smooth(method = "lm") + 
+          facet_wrap(~ dataset)
+      })      
+    })
+    
+    observeEvent(input$click1, {
+      output$fit1 = renderPrint({
+        dat %>% filter(dataset == "I") %>% lm(y ~ x, data = .) %>% summary()
+      })
+      output$fit2 = renderPrint({
+        dat %>% filter(dataset == "II") %>% lm(y ~ x, data = .) %>% summary()
+      })
+      output$fit3 = renderPrint({
+        dat %>% filter(dataset == "III") %>% lm(y ~ x, data = .) %>% summary()
+      })
+      output$fit4 = renderPrint({
+        dat %>% filter(dataset == "IV") %>% lm(y ~ x, data = .) %>% summary()
+      })
+    })
+
+    observeEvent(input$click1, {
+      output$textout2 <- renderText({
+        "Before clicking the next button think about what you expect the scatter plots of the four datasets will look like. Do you expect them to be similar or different?"
+        })
+    })
+
+    observeEvent(input$click4, {
+      output$plot2 = renderPlotly({
+        ggplot(dat, aes(x, y, color = dataset)) + 
+          geom_smooth(method = "lm") + 
+          geom_point() +
+          facet_wrap(~ dataset)
+      })      
+    })
+
+    observeEvent(input$click5, {
+      output$textout1 <- renderUI({
+        HTML("The take home message from this activity is that different datasets can generate the same summary statistics and regression coefficients. Therefore, viewing plots of your data is usually valuable. <br><br> After looking at the scatter plots with the fitted lines do you think that it is appropriate to fit linear regression to all of the datasets?")
+        })
+    })
+    
+  },
+  options = list(height = 1500)
+)
+```

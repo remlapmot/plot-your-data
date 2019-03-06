@@ -1,7 +1,6 @@
 ---
 title: "Plot your data"
 author: "Tom Palmer, `tom.palmer@lancaster.ac.uk`, Department of Mathematics and Statistics, Lancaster University"
-date: "MSc Statistics Open Day, 27^th^ February 2019"
 output:
   html_document:
     theme: flatly

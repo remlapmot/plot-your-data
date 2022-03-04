@@ -1,6 +1,6 @@
 ---
 title: "Plot your data"
-author: "Tom Palmer, `tom.palmer@lancaster.ac.uk`, Department of Mathematics and Statistics, Lancaster University"
+author: "Tom Palmer, PHS and MRC IEU, University of Bristol"
 output:
   html_document:
     theme: flatly

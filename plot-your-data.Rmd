@@ -75,7 +75,7 @@ shinyApp(
     observeEvent(input$click1, {
       output$plot1 = renderPlotly({
         ggplot(dat, aes(x, y, color = dataset)) + 
-          geom_smooth(method = "lm") + 
+          geom_smooth(formula = y ~ x, method = "lm") + 
           facet_wrap(~ dataset)
       })      
     })
@@ -104,7 +104,7 @@ shinyApp(
     observeEvent(input$click4, {
       output$plot2 = renderPlotly({
         ggplot(dat, aes(x, y, color = dataset)) + 
-          geom_smooth(method = "lm") + 
+          geom_smooth(formula = y ~ x, method = "lm") + 
           geom_point() +
           facet_wrap(~ dataset)
       })      

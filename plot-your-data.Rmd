@@ -57,7 +57,7 @@ shinyApp(
           select(dataset, x, y) %>%
           group_by(dataset) %>%
           summarise_all(
-            funs(mean = mean, var = var)
+            list(mean = mean, var = var)
           )
       })
     })

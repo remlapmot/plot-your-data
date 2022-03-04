@@ -112,7 +112,7 @@ shinyApp(
 
     observeEvent(input$click5, {
       output$textout1 <- renderUI({
-        HTML("The take home message from this activity is that different datasets can generate the same summary statistics and regression coefficients. Therefore, viewing plots of your data is usually valuable. <br><br> After looking at the scatter plots with the fitted lines do you think that it is appropriate to fit linear regression to all of the datasets?")
+        HTML("The take home message from this activity is that very different datasets can generate the same summary statistics and regression coefficients. Therefore, viewing plots of your data is usually valuable. <br><br> After looking at the scatter plots with the fitted lines do you think that it is appropriate to fit linear regression to all of the datasets?")
         })
     })
     

@@ -6,22 +6,21 @@
 R Shiny App demonstrating importance of plotting data when fitting
 statistical models.
 
-## Building the website
+## Building the app
 
-To build the website, either
+To build the app, either
 
 -   open the project in RStudio, open `plot-your-data.Rmd` and click the
-    *Knit* button
+    *Run Document* button
 
 -   or, run the following code in R
 
     ``` r
-    rmarkdown::render('plot-your-data.Rmd', encoding = 'UTF-8')
+    rmarkdown::run('plot-your-data.Rmd')
     ```
 
-## Website
+## App URL
 
-The website is rendered at
-<https://remlapmot.shinyapps.io/plot-your-data/>
+The app is served at <https://remlapmot.shinyapps.io/plot-your-data/>
 
 <img src="img/qrcode.svg" width="33%" />

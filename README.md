@@ -10,30 +10,31 @@ statistical models.
 
 To build the app, either
 
--   open the project in RStudio, open `plot-your-data.Rmd` and click the
-    *Run Document* button
+- open the project in RStudio, open `plot-your-data.Rmd` and click the
+  *Run Document* button
 
--   or, run the following code in R
+- or, run the following code in R
 
-    ``` r
-    rmarkdown::run('plot-your-data.Rmd')
-    ```
+  ``` r
+  rmarkdown::run('plot-your-data.Rmd')
+  ```
 
 ## App URL
 
-The app is deployed at <https://remlapmot.shinyapps.io/plot-your-data/>
+The app is deployed at
+<https://remlapmot-plot-your-data.share.connect.posit.cloud>
 
-<img src="img/qrcode.svg" width="33%" />
+<img src="img/qrcode.svg" alt="" width="33%" />
 
 ### To deploy (and update) to shinyapps.io
 
--   Click the *Publish* button (blue circle in top right corner of
-    Source pane) and follow subsequent instructions to connect your
-    shinyapps.io account
+- Click the *Publish* button (blue circle in top right corner of Source
+  pane) and follow subsequent instructions to connect your shinyapps.io
+  account
 
--   Or, in RStudio go to: Tools \| Global Options \| Publishing; and
-    Connect shinyapps.io account and then run
+- Or, in RStudio go to: Tools \| Global Options \| Publishing; and
+  Connect shinyapps.io account and then run
 
-    ``` r
-    rsconnect::deployApp()
-    ```
+  ``` r
+  rsconnect::deployApp()
+  ```
